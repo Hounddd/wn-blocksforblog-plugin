@@ -1,0 +1,10 @@
+/*!
+ * hounddd.blocksforblog - 1.0.0 - 20230603-183356
+ * Hounddd.BlocksForBlog Plugin for WinterCMS
+ *
+ * Damien MATHIEU - HOUNDDD (https://www.hounddd.fr/)
+ *
+ * filebase: blocksforblog.css - hash: 7d72c8eb48dd5c9a
+ */
+
+.form-group.dropdown-field[id*=featured_image] .select2-selection--single{height:auto}.form-group.dropdown-field[id*=featured_image] .select2-selection--single .select2-selection__rendered img,.select2-container--default .select2-results>.select2-results__options[id*=featured_image]>.select2-results__option img{max-width:100px}

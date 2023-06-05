@@ -1,0 +1,22 @@
+{
+    "name": "hounddd/wn-blocksforblog-plugin",
+    "type": "winter-plugin",
+    "description": "Add blocks to Winter.Blog plugin",
+    "homepage": "https://github.com/Hounddd/wn-blocksforblog-plugin",
+    "keywords": ["winter cms", "winter", "plugin", "blocks", "blog"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hounddd - Damien MATHIEU",
+            "email": "damien@hounddd.fr",
+            "role": "Original Author"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "league/html-to-markdown": "^5.1.0"
+    },
+    "extra": {
+        "installer-name": "blocksforblog"
+    }
+}

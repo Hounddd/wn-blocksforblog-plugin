@@ -1,0 +1,31 @@
+{
+    "name": "hounddd.blocksforblog",
+    "version": "1.0.0",
+    "description": "Hounddd.BlocksForBlog Plugin for WinterCMS",
+    "private": true,
+    "scripts": {
+    },
+    "keywords": [],
+    "authors": [
+        {
+            "name": "Damien MATHIEU",
+            "email": "contact@hounddd.fr",
+            "url": "https://www.hounddd.fr/",
+            "company": "HOUNDDD"
+        }
+    ],
+    "homepage": "https://github.com/Hounddd/wn-blocksforblog-plugin",
+    "company": "HOUNDDD",
+    "license": "MIT",
+    "devDependencies": {
+        "autoprefixer": "^10.4.8",
+        "laravel-mix": "^6.0.49",
+        "laravel-mix-banner": "^0.1.4",
+        "resolve-url-loader": "^5.0.0",
+        "sass": "^1.54.6",
+        "sass-loader": "^12.6.0"
+    },
+    "dependencies": {
+    },
+    "browserslist": "last 2 years, Chrome >= 13"
+}
