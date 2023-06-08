@@ -59,22 +59,27 @@ trait BootWinterBlog
                 return;
             }
 
+            $blocks = [
+                'columns_two',
+                'title',
+                'richtext',
+                'plaintext',
+                'code',
+                'blog_featured_image',
+                'image',
+                'divider',
+                'button',
+            ];
+
+            // Allow other plugins to add their own blocks
+            Event::fire('hounddd.blocksforblog.beforeaddblocks', [&$blocks]);
+
             $widget->addTabFields([
                 'metadata[blocks]' => [
                     'tab' => 'winter.blog::lang.post.tab_edit',
                     'span' => 'full',
                     'type' => 'blocks',
-                    'allow' => [
-                        'columns_two',
-                        'title',
-                        'richtext',
-                        'plaintext',
-                        'code',
-                        'blog_featured_image',
-                        'image',
-                        'divider',
-                        'button',
-                    ],
+                    'allow' => $blocks,
                 ]
             ]);
 
