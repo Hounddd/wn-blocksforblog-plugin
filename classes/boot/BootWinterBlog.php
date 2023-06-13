@@ -131,14 +131,14 @@ trait BootWinterBlog
             $widget->addTabFields([
                 'section_blocks' => [
                     'tab' => 'winter.blog::lang.blog.tab_general',
-                    'label' => 'Blocks plugin',
+                    'label' => 'hounddd.blocksforblog::lang.settings.blocks_section',
                     'span' => 'full',
                     'type' => 'section',
                     'permissions' => 'hounddd.blocksforblog.access_settings',
                 ],
                 'blocks_replace_blog_editor' => [
                     'tab' => 'winter.blog::lang.blog.tab_general',
-                    'label' => 'Replace post content editor by blocks',
+                    'label' => 'hounddd.blocksforblog::lang.settings.replace_editor',
                     'span' => 'full',
                     'type' => 'switch',
                     'default' => 'false',

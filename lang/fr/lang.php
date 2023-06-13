@@ -18,4 +18,9 @@ return [
             'description' => 'Image liée au post du blog',
         ],
     ],
+
+    'settings' => [
+        'blocks_section' => 'Plugin Blocks',
+        'replace_editor' => 'Remplacer l’éditeur de contenu par des blocs',
+    ]
 ];
