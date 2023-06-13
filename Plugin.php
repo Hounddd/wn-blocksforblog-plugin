@@ -12,6 +12,11 @@ class Plugin extends PluginBase
     use \Hounddd\BlocksForBlog\Classes\Boot\BootWinterBlog;
 
     /**
+     * @var array Plugin dependencies
+     */
+    public $require = ['Winter.Blocks'];
+
+    /**
      * Returns information about this plugin.
      */
     public function pluginDetails(): array
@@ -38,11 +43,15 @@ class Plugin extends PluginBase
     {
         $this->pluginManager = PluginManager::instance();
 
-        //
-        // Extend Winter.Blog plugin
-        //
-        if ($this->pluginManager->exists('Winter.Blog')) {
-            $this->BootWinterBlog();
+        if ($this->pluginManager->exists('Winter.Blocks')) {
+
+            //
+            // Extend Winter.Blog plugin
+            //
+            if ($this->pluginManager->exists('Winter.Blog')) {
+                $this->BootWinterBlog();
+            }
+
         }
     }
 
