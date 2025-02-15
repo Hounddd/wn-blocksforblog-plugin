@@ -1,7 +1,7 @@
 name: hounddd.blocksforblog::lang.blocks.featured_image.name
 description: hounddd.blocksforblog::lang.blocks.featured_image.description
 icon: icon-picture-o
-context: ["blog"]
+tags: ["blog"]
 fields:
     featured_image:
         label: hounddd.blocksforblog::lang.blocks.general.choose

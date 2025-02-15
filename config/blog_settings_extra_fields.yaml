@@ -1,0 +1,70 @@
+
+fields:
+
+    section_blocks:
+        tab: winter.blog::lang.blog.tab_general
+        label: hounddd.blocksforblog::lang.settings.blocks_section
+        span: full
+        type: section
+        permissions: hounddd.blocksforblog.access_settings
+
+
+    blocks_replace_blog_editor:
+        tab: winter.blog::lang.blog.tab_general
+        label: hounddd.blocksforblog::lang.settings.replace_editor
+        span: full
+        type: switch
+        default: false
+        permissions: hounddd.blocksforblog.access_settings
+
+    allowed_blocks:
+        tab: winter.blog::lang.blog.tab_general
+        label: hounddd.blocksforblog::lang.settings.allowed_blocks
+        span: left
+        type: taglist
+        options: true
+        customTags: false
+        useKey: true
+        permissions: hounddd.blocksforblog.access_settings
+
+    allowed_tags:
+        tab: winter.blog::lang.blog.tab_general
+        label: hounddd.blocksforblog::lang.settings.allowed_tags
+        span: right
+        type: taglist
+        options: true
+        customTags: false
+        permissions: hounddd.blocksforblog.access_settings
+
+    ignored_blocks:
+        tab: winter.blog::lang.blog.tab_general
+        label: hounddd.blocksforblog::lang.settings.ignored_blocks
+        span: left
+        type: taglist
+        options: true
+        customTags: false
+        useKey: true
+        permissions: hounddd.blocksforblog.access_settings
+        # trigger:
+            # action: show
+            # field: allowed_blocks
+
+    ignored_tags:
+        tab: winter.blog::lang.blog.tab_general
+        label: hounddd.blocksforblog::lang.settings.ignored_tags
+        span: right
+        type: taglist
+        options: true
+        customTags: false
+        permissions: hounddd.blocksforblog.access_settings
+
+    _control:
+        tab: winter.blog::lang.blog.tab_general
+        span: full
+        type: partial
+        path: $/hounddd/blocksforblog/partials/_control
+        dependsOn:
+          - allowed_blocks
+          - allowed_tags
+          - ignored_blocks
+          - ignored_tags

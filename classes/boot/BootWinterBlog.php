@@ -3,8 +3,12 @@
 namespace Hounddd\BlocksForBlog\Classes\Boot;
 
 use Event;
-use Winter\Blog\Models\Settings as BlogSettings;
+use Hounddd\Blocksforblog\Classes\BlocksHelper;
 use System\Classes\PluginManager;
+use Winter\Blocks\Classes\BlockManager;
+use Winter\Blog\Models\Settings as BlogSettings;
+use Winter\Storm\Support\Facades\Config;
+use Winter\Storm\Support\Facades\Yaml;
 
 trait BootWinterBlog
 {
@@ -13,12 +17,11 @@ trait BootWinterBlog
         $pluginManager = PluginManager::instance();
 
         if ($pluginManager->exists('Winter.Blocks')) {
+            $this->updateBlogSettings();
 
             if (BlogSettings::get('blocks_replace_blog_editor', false)) {
                 $this->updatePostFields();
             }
-
-            $this->updateBlogSettings();
         }
     }
 
@@ -59,28 +62,29 @@ trait BootWinterBlog
                 return;
             }
 
-            $blocks = [
-                'columns_two',
-                'title',
-                'richtext',
-                'plaintext',
-                'code',
-                'blog_featured_image',
-                'image',
-                'divider',
-                'button',
-            ];
+            $blocksHelper = BlocksHelper::instance();
 
-            // Allow other plugins to add their own blocks
-            Event::fire('hounddd.blocksforblog.beforeaddblocks', [&$blocks]);
+            $blocksHelper->setRestrictions([
+                'allowed_blocks' => BlogSettings::get('allowed_blocks', ''),
+                'allowed_tags' => BlogSettings::get('allowed_tags', ''),
+                'ignored_blocks' => BlogSettings::get('ignored_blocks', ''),
+                'ignored_tags' => BlogSettings::get('ignored_tags', ''),
+            ]);
+
+            $blogBlocksField = array_filter(
+                array_merge([
+                        'tab' => 'winter.blog::lang.post.tab_edit',
+                        'span' => 'full',
+                        'type' => 'blocks',
+                    ],[
+                        'allow' => $blocksHelper->getAllow(),
+                        'ignore' => $blocksHelper->getIgnore(),
+                    ]
+                )
+            );
 
             $widget->addTabFields([
-                'metadata[blocks]' => [
-                    'tab' => 'winter.blog::lang.post.tab_edit',
-                    'span' => 'full',
-                    'type' => 'blocks',
-                    'allow' => $blocks,
-                ]
+                'metadata[blocks]' => $blogBlocksField,
             ]);
 
             $widget->removeField('content');
@@ -115,10 +119,30 @@ trait BootWinterBlog
     }
 
     /**
-     * Update blog settings page
+     * Update blog settings page and model
      */
     public function updateBlogSettings(): void
     {
+        BlogSettings::extend(function ($model) {
+
+            $model->addDynamicMethod('getAllowedBlocksOptions', function () {
+                return BlocksHelper::instance()->getBlocksNames();
+            });
+
+            $model->addDynamicMethod('getIgnoredBlocksOptions', function () {
+                return BlocksHelper::instance()->getBlocksNames();
+            });
+
+            $model->addDynamicMethod('getAllowedTagsOptions', function () {
+                return BlocksHelper::instance()->getTags();
+            });
+
+            $model->addDynamicMethod('getIgnoredTagsOptions', function () {
+                return BlocksHelper::instance()->getTags();
+            });
+        });
+
+
         Event::listen('backend.form.extendFields', function ($widget) {
 
             if (!($widget->getController() instanceof \System\Controllers\Settings
@@ -128,23 +152,9 @@ trait BootWinterBlog
                 return;
             }
 
-            $widget->addTabFields([
-                'section_blocks' => [
-                    'tab' => 'winter.blog::lang.blog.tab_general',
-                    'label' => 'hounddd.blocksforblog::lang.settings.blocks_section',
-                    'span' => 'full',
-                    'type' => 'section',
-                    'permissions' => 'hounddd.blocksforblog.access_settings',
-                ],
-                'blocks_replace_blog_editor' => [
-                    'tab' => 'winter.blog::lang.blog.tab_general',
-                    'label' => 'hounddd.blocksforblog::lang.settings.replace_editor',
-                    'span' => 'full',
-                    'type' => 'switch',
-                    'default' => 'false',
-                    'permissions' => 'hounddd.blocksforblog.access_settings',
-                ],
-            ]);
+            $fields = Yaml::parse(file_get_contents(plugins_path('hounddd/blocksforblog/config/blog_settings_extra_fields.yaml')))['fields'];
+
+            $widget->addTabFields($fields);
         });
     }
 }

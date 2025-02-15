@@ -95,4 +95,14 @@ class Plugin extends PluginBase
     {
         return [];
     }
+
+    /**
+     * Registers the settings provided by this plugin.
+     *
+     * This plugin extends the Winter.Blog plugin settings.
+     */
+    public function registerSettings(): array
+    {
+        return [];
+    }
 }
