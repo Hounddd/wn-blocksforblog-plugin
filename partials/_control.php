@@ -1,7 +1,6 @@
-<h5><b><?= trans('hounddd.blocksforblog::lang.settings.control') ?></b></h5>
-<p><?= trans('hounddd.blocksforblog::lang.settings.control_description') ?></p>
 <?php
     use Hounddd\Blocksforblog\Classes\BlocksHelper;
+    use Symfony\Component\Yaml\Yaml;
 
     $blocksHelper = BlocksHelper::instance();
 
@@ -35,7 +34,26 @@
         return 0;
     });
 ?>
-<div class="control-list">
+
+<h5><b><?= trans('hounddd.blocksforblog::lang.settings.control') ?></b></h5>
+<div class="row-flush">
+    <div class="col-md-10">
+        <p><?= trans('hounddd.blocksforblog::lang.settings.control_description') ?></p>
+    </div>
+    <div class="col-md-2">
+        <a
+            href="#blogFieldControl"
+            data-toggle="modal"
+            data-size="large"
+            class="btn btn-primary btn-sm wn-icon-cubes"
+        >
+            <?= e(trans('hounddd.blocksforblog::lang.settings.view_field_defintion')) ?>
+        </a>
+    </div>
+</div>
+
+
+<div class="control-list list-scrollable" data-control="listwidget">
     <table class="table data table-hover">
         <thead>
             <tr>
@@ -61,4 +79,32 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+</div>
+
+<div class="control-popup modal fade" id="blogFieldControl" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="popup">&times;</button>
+                <h4 class="modal-title">
+                    <?= e(trans('hounddd.blocksforblog::lang.settings.control_field')); ?>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p><?= e(trans('hounddd.blocksforblog::lang.settings.control_field_description')); ?></p>
+                <?php
+                    $blogContentBlocks =  array_filter($blocksHelper->getBlogBlocksField());
+                    dump($blogContentBlocks);
+
+
+                    // echo "<pre>". Yaml::dump($blogContentBlocks, 2) ."</pre>";
+                ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <?= e(trans('backend::lang.form.close')); ?>
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

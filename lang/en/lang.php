@@ -24,9 +24,10 @@ return [
     'settings' => [
         'allowed_blocks' => 'Allowed blocks',
         'allowed_tags' => 'Allowed tags',
-        'blocks_section' => 'Blocks plugin',
         'control' => 'Control',
         'control_description' => 'List of blocks available in the blog editing interface.',
+        'control_field' => 'Blocks field definition for blog',
+        'control_field_description' => 'This is the generated definition for the blocks field that will be available in the blog editing interface for a post.',
         'ignored_blocks' => 'Ignored blocks',
         'ignored_tags' => 'Ignored tags',
         'name' => 'Block\'s name',
@@ -35,5 +36,9 @@ return [
         'replace_editor' => 'Replace post content editor by blocks',
         'status' => 'Status',
         'tags' => 'Block\'s tags',
+        'view_field_defintion' => 'View field definition',
+        'tabs' => [
+            'blocks' => 'Blocks',
+        ],
     ]
 ];

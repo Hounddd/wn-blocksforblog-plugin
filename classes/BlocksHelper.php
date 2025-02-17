@@ -136,6 +136,23 @@ class BlocksHelper
     }
 
     /**
+     * Get the field definition for the blog blocks field
+     */
+    public function getBlogBlocksField(): array
+    {
+        return array_merge([
+                'tab' => 'winter.blog::lang.post.tab_edit',
+                'span' => 'full',
+                'type' => 'blocks',
+            ],[
+                'allow' => $this->getAllow(),
+                'ignore' => $this->getIgnore(),
+            ]
+        );
+    }
+
+
+    /**
      * Determines if a block is allowed according to the widget's ignore/allow list.
      */
     public function isBlockAllowed(string $code, array|string $blockTags): array
