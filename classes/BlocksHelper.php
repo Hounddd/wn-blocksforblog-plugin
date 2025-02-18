@@ -74,10 +74,11 @@ class BlocksHelper
      */
     public function setRestrictions(array $restrictions): void
     {
-        $blocksAllowed = (array) array_filter(explode(',', array_get($restrictions, 'allowed_blocks', '')));
-        $tagsAllowed = (array) array_filter(explode(',', array_get($restrictions, 'allowed_tags', '')));
-        $blocksIgnored = (array) array_filter(explode(',', array_get($restrictions, 'ignored_blocks', '')));
-        $tagsIgnored = (array) array_filter(explode(',', array_get($restrictions, 'ignored_tags', '')));
+
+        $blocksAllowed = $this->getRestriction($restrictions, 'allowed_blocks');
+        $tagsAllowed = $this->getRestriction($restrictions, 'allowed_tags');
+        $blocksIgnored = $this->getRestriction($restrictions, 'ignored_blocks');
+        $tagsIgnored = $this->getRestriction($restrictions, 'ignored_tags');
 
         $allow = [];
         $ignore = [];
@@ -210,5 +211,21 @@ class BlocksHelper
             'active' => true,
             'reason' => '',
         ];
+    }
+
+    /**
+     * Get a restriction from the restrictions array
+     */
+    protected function getRestriction(array $restrictions, string $key): array
+    {
+        $value = array_get($restrictions, $key, '');
+
+        if (is_string($value)) {
+            $value = explode(',', $value);
+        } else {
+            $value = [];
+        }
+
+        return (array) array_filter($value);
     }
 }
