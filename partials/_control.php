@@ -45,7 +45,7 @@
             href="#blogFieldControl"
             data-toggle="modal"
             data-size="large"
-            class="btn btn-primary btn-sm wn-icon-cubes"
+            class="btn btn-primary btn-xs wn-icon-cubes"
         >
             <?= e(trans('hounddd.blocksforblog::lang.settings.view_field_defintion')) ?>
         </a>
